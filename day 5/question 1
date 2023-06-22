@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Student {
+    int rollno;
+    char name[20];
+    float marks;
+};
+
+void parseString(const char* input, struct Student* students, int size) {
+    char temp[20];
+    int i = 0;
+    int count = 0;
+
+    while (*input) {
+        if (*input != ' ') {
+            temp[count++] = *input;
+        } else {
+            temp[count] = '\0';
+            count = 0;
+
+            switch (i % 3) {
+                case 0:
+                    students[i / 3].rollno = atoi(temp);
+                    break;
+                case 1:
+                    strcpy(students[i / 3].name, temp);
+                    break;
+                case 2:
+                    students[i / 3].marks = atof(temp);
+                    break;
+            }
+
+            i++;
+        }
+
+        input++;
+    }
+
+    // Assign the last field
+    temp[count] = '\0';
+
+    switch (i % 3) {
+        case 0:
+            students[i / 3].rollno = atoi(temp);
+            break;
+        case 1:
+            strcpy(students[i / 3].name, temp);
+            break;
+        case 2:
+            students[i / 3].marks = atof(temp);
+            break;
+    }
+}
+
+int main() {
+    const char* input = "1001 Adarsh 100.00";
+    struct Student students[1];
+
+    parseString(input, students, sizeof(students) / sizeof(students[0]));
+
+    printf("Roll No: %d\n", students[0].rollno);
+    printf("Name: %s\n", students[0].name);
+    printf("Marks: %.2f\n", students[0].marks);
+
+    return 0;
+}
