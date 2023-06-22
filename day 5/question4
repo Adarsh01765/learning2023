@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int rollno;
+    char name[20];
+    float marks;
+};
+
+void sortArray(struct Student* students, int size) {
+    int i, j;
+    struct Student temp;
+
+    for (i = 0; i < size - 1; i++) {
+        for (j = i + 1; j < size; j++) {
+            if (students[i].marks < students[j].marks) {
+                temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
+            }
+        }
+    }
+}
+
+void displayArray(const struct Student* students, int size) {
+    int i;
+    for (i = 0; i < size; i++) {
+        printf("Student %d:\n", i + 1);
+        printf("Roll No: %d\n", students[i].rollno);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: %.2f\n", students[i].marks);
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Student students[5] = {
+        {1001, "adarsh", 80.5},
+        {1002, "saurabh", 75.0},
+        {1003, "rishav", 90.2},
+        {1004, "akash", 85.3},
+        {1005, "Sarah", 92.7}
+    };
+
+    int size = sizeof(students) / sizeof(students[0]);
+
+    printf("Before sorting:\n");
+    displayArray(students, size);
+
+    sortArray(students, size);
+
+    printf("After sorting:\n");
+    displayArray(students, size);
+
+    return 0;
+}
