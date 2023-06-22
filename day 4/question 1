@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+struct Box {
+    double length;
+    double width;
+    double height;
+};
+
+// Function to calculate the volume of the box
+double calculateVolume(struct Box* boxPtr) {
+    double volume = boxPtr->length * boxPtr->width * boxPtr->height;
+    return volume;
+}
+
+// Function to calculate the total surface area of the box
+double calculateSurfaceArea(struct Box* boxPtr) {
+    double surfaceArea = 2 * (boxPtr->length * boxPtr->width +
+                              boxPtr->length * boxPtr->height +
+                              boxPtr->width * boxPtr->height);
+    return surfaceArea;
+}
+
+int main() {
+    struct Box myBox;
+    struct Box* boxPtr;
+
+    // Assign values to the box dimensions
+    myBox.length = 5.0;
+    myBox.width = 3.0;
+    myBox.height = 2.0;
+
+    // Assign the address of myBox to the pointer
+    boxPtr = &myBox;
+
+    // Access the members of the structure using the indirection operator (*) and dot operator (.)
+    double volume1 = (*boxPtr).length * (*boxPtr).width * (*boxPtr).height;
+    double surfaceArea1 = 2 * ((*boxPtr).length * (*boxPtr).width +
+                               (*boxPtr).length * (*boxPtr).height +
+                               (*boxPtr).width * (*boxPtr).height);
+
+    // Access the members of the structure using the arrow operator (->)
+    double volume2 = boxPtr->length * boxPtr->width * boxPtr->height;
+    double surfaceArea2 = 2 * (boxPtr->length * boxPtr->width +
+                               boxPtr->length * boxPtr->height +
+                               boxPtr->width * boxPtr->height);
+
+    printf("Volume (using (*) and .): %.2f\n", volume1);
+    printf("Surface Area (using (*) and .): %.2f\n", surfaceArea1);
+    printf("Volume (using ->): %.2f\n", volume2);
+    printf("Surface Area (using ->): %.2f\n", surfaceArea2);
+
+    return 0;
+}
