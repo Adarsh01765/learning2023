@@ -10,9 +10,9 @@ struct Student {
 void initializeArray(struct Student* students, int size) {
     int i;
     for (i = 0; i < size; i++) {
-        students[i].rollno = 0;
-        strcpy(students[i].name, "");
-        students[i].marks = 0.0;
+        students[i].rollno = 1;
+        strcpy(students[i].name, "adarsh");
+        students[i].marks = 100.0;
     }
 }
 
